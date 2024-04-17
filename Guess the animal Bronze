@@ -1,0 +1,58 @@
+// Alex Alvarez Morales
+#include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
+/// Macros
+#define int long long
+#define sz size()
+#define ull unsigned long long
+#define ld long double
+#define vi vector<int>
+#define ii pair<int, int>
+#define iii pair<int, ii>
+#define vii vector<ii>
+#define f first
+#define s second
+#define s1 s.f
+#define t s.s
+#define pb push_back
+#define fl '\n'
+#define el endl
+#define all(x) x.begin(), x.end()
+#define rall(x) x.rbegin(), x.rend()
+#define IOS                           \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(nullptr);                 \
+    cout.tie(nullptr);
+
+using namespace std;
+
+int32_t main()
+{
+   std::ifstream read("guess.in");
+   int n , m , sol = 0 , cont = 0;
+   read >> n;
+   vector<set<string> >a(n + 1);
+   for(int i = 0 ; i < n ; i++){
+      string s , s2; read >> s >> m;
+      while(m--){
+        read >> s2;
+        a[i].insert(s2);
+        }
+      }
+
+    for(int i = 0 ; i < n ; i++){
+        for(int y = i + 1 ; y < n ; y++){
+            cont = 0;
+            for(auto x : a[y]){
+                if(a[i].count(x))cont++;
+                }
+            sol = max(cont + 1 , sol);
+            }
+        }
+   // cout << sol << '\n';
+    std::ofstream("guess.out") << sol << endl;
+}
+/*
+Recuerda el overflow aunque no lo veas
+ */
