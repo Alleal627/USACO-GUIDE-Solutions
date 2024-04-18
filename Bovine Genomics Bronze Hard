@@ -1,0 +1,74 @@
+// Alex Alvarez Morales
+#include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
+/// Macros
+#define int long long
+#define sz size()
+#define ull unsigned long long
+#define ld long double
+#define vi vector<int>
+#define ii pair<int, int>
+#define iii pair<int, ii>
+#define vii vector<ii>
+#define f first
+#define s second
+#define s1 s.f
+#define t s.s
+#define pb push_back
+#define fl '\n'
+#define el endl
+#define all(x) x.begin(), x.end()
+#define rall(x) x.rbegin(), x.rend()
+#define IOS                           \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(nullptr);                 \
+    cout.tie(nullptr);
+
+using namespace std;
+
+int32_t main()
+{
+    ifstream read("cownomics.in");
+    int n , m , sol = 0;  read >> n >> m;
+
+    char s[n + 1][m + 1] , p[n + 1][m + 1];
+
+    for(int i = 0 ; i < n ; i++){
+        for(int y = 0 ; y < m ; y++){
+            read >> s[i][y];
+            }
+        }
+    for(int i = 0 ; i < n ; i++){
+        for(int y = 0 ; y < m ; y++){
+            read >> p[i][y];
+            }
+        }
+
+   for(int i = 0 ; i < m ; i++){
+    for(int y = i + 1 ; y < m ; y++){
+        for(int x = y + 1; x < m ; x++){
+            map<string , int>ms; int ok = 1;
+
+            for(int act = 0 ; act < n ; act++){
+                string now = "";
+                now += s[act][i];now += s[act][y];now += s[act][x];
+                //cout << now << '\n';
+                ms[now] = 1;
+                }
+            for(int act = 0 ; act < n ; act++){
+                string now = "";
+                now += p[act][i];now += p[act][y];now += p[act][x];
+                if(ms[now]){
+                    ok = 0; break;
+                    }
+                }
+             sol += ok;
+            }
+        }
+    }
+    ofstream("cownomics.out") << sol;
+}
+/*
+Recuerda el overflow aunque no lo veas
+ */
