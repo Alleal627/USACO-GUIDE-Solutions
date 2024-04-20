@@ -1,0 +1,74 @@
+// Alex Alvarez Morales
+#include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
+/// Macros
+#define int long long
+#define sz size()
+#define ull unsigned long long
+#define ld long double
+#define vi vector<int>
+#define ii pair<int, int>
+#define iii pair<int, ii>
+#define vii vector<ii>
+/*#define f first
+#define s second*/
+#define s1 s.f
+#define t s.s
+#define pb push_back
+#define fl '\n'
+#define el endl
+#define all(x) x.begin(), x.end()
+#define rall(x) x.rbegin(), x.rend()
+#define IOS                           \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(nullptr);                 \
+    cout.tie(nullptr);
+
+using namespace std;
+
+struct p{
+int f , s;
+};
+
+int32_t main()
+{
+    freopen("balancing.in", "r", stdin);
+	freopen("balancing.out", "w", stdout);
+
+    int n , m , sol = 1e9; cin >> n >> m;
+    vector<p>v(n); vector<int>x , y;
+
+    for(auto &i : v)
+    {
+    cin >> i.f >> i.s;
+    x.pb(i.f + 1); y.pb(i.s + 1);
+    }
+
+            for(auto i : x){
+                for(auto y2 : y){
+                    int c1 = 0 , c2 = 0 , c3 = 0 , c4 = 0;//pafff
+                    for(auto x : v){
+
+                    if(x.f < i && x.s < y2)
+                    c1++;
+
+                    if(x.f > i && x.s > y2)
+                    c4++;
+
+                    if(x.f < i && x.s > y2)
+                    c2++;
+
+                    if(x.f > i && x.s < y2)
+                    c3++;
+
+                    }
+                sol = min(max({c1 , c2 , c3 , c4}), sol);
+                }
+        }
+
+    cout << sol << '\n';
+}
+/*
+Recuerda el overflow aunque no lo veas
+ */
