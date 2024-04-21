@@ -1,0 +1,77 @@
+// Alex Alvarez Morales
+#include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
+/// Macros
+#define int long long
+#define sz size()
+#define ull unsigned long long
+#define ld long double
+#define vi vector<int>
+#define ii pair<int, int>
+#define iii pair<int, ii>
+#define vii vector<ii>
+/*#define f first
+#define s second*/
+#define s1 s.f
+#define t s.s
+#define pb push_back
+#define fl '\n'
+#define el endl
+#define all(x) x.begin(), x.end()
+#define rall(x) x.rbegin(), x.rend()
+#define IOS                           \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(nullptr);                 \
+    cout.tie(nullptr);
+
+using namespace std;
+
+int32_t main()
+{
+    /*freopen("balancing.in", "r", stdin);
+	freopen("balancing.out", "w", stdout);*/
+
+    //IOS;
+    int x = 1;
+    cin >> x;
+    while(x--){
+        int n , sum = 0;
+        cin >> n;
+        vector<int>v(n);
+        set<int>st;
+        for(int &i : v){cin >> i; sum += i; st.insert(i);}
+
+        if(st.size() == 1){
+            cout << 0 << '\n';
+            break;
+            }
+
+        for(int i = n ; i >= 1 ; i--){
+            if(sum % i == 0){
+                int act = 0 , tar = sum / i; bool ok = true;
+                for(int y = 0; y < n ; y++){
+                    act += v[y];
+                    if(act > tar){
+                        //cout << y << ' ' << act << ' ' << tar << '\n';
+                        ok = false;
+                        break;
+                        }
+                    else if(act == tar)
+                        act = 0;
+                    }
+                if(ok){
+                cout << n - i << '\n';
+                break;
+                    }
+                }
+            }
+
+
+    }
+    return 0;
+
+}
+/*
+Recuerda el overflow aunque no lo veas
+ */
