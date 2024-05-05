@@ -1,0 +1,111 @@
+// Alex Alvarez Morales
+#include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
+/// Macros
+///Enbia menzajjito
+#define int long long
+#define sz size()
+#define ull unsigned long long
+#define ld long double
+#define vi vector<int>
+#define ii pair<int, int>
+#define iii pair<int, ii>
+#define vii vector<ii>
+/*#define f first
+#define s second
+#define s1 s.f
+#define t s.s*/
+#define pb push_back
+#define fl '\n'
+#define el endl
+#define all(x) x.begin(), x.end()
+#define rall(x) x.rbegin(), x.rend()
+#define IOS                           \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(nullptr);                 \
+    cout.tie(nullptr);
+
+using namespace std;
+
+
+
+struct inf{
+int t , c , e;
+};
+
+int n , t;
+vector<bool>usd;
+vector<inf>v;
+
+bool check(int zero , int k){
+    vector<bool>act(n);
+    vector<int>kas(n);
+    act[zero] = 1;
+
+    for(inf i : v){
+        if(act[i.c])kas[i.c]++;
+        if(act[i.e])kas[i.e]++;
+
+        if(kas[i.c] <= k && act[i.c])
+            act[i.e] = 1;
+
+        if(kas[i.e] <= k && act[i.e])
+            act[i.c] = 1;
+        }
+    for(int i = 0 ; i < n ; i++){
+        if(act[i] != usd[i])
+            return false;
+        }
+    return true;
+}
+
+int32_t main()
+{
+    freopen("tracing.in" , "r" , stdin);
+    freopen("tracing.out" , "w" , stdout);
+
+    cin >> n >> t;
+    set<int>poss;
+    int maxs = -1 , mins = t;
+    usd.resize(n);v.resize(t);
+    string a; cin >> a;
+
+    for(int i = 0 ; i < n ; i++)
+        usd[i] = (a[i] == '1' ? 1 : 0);
+
+    auto sort_by_t = [&](inf i , inf y){
+    return (i.t < y.t);
+    };
+
+    for(inf &i : v){cin >> i.t >> i.c >> i.e;
+                    i.t--; i.c--; i.e--;
+                    }
+
+    sort(begin(v) , end(v) , sort_by_t);
+
+   for(int i = 0 ; i < n ; i++){
+        for(int y = 0 ; y <= t ; y++){
+            if(check(i , y)){
+                mins = min(mins , y);
+                maxs = max(maxs , y);
+                poss.insert(i);
+                }
+            }
+       }
+    cout << poss.size() << ' ' << mins << ' ';
+    if(maxs == t)
+    cout << "Infinity";
+
+    else
+    cout << maxs;
+
+    cout << '\n';
+
+}
+/*
+Recuerda el overflow aunque no lo veas
+*/
+
+
+
