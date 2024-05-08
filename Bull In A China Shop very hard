@@ -1,0 +1,89 @@
+// Alex Alvarez Morales
+#include <bits/stdc++.h>
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
+/// Macros
+#define int long long
+#define sz size()
+#define ull unsigned long long
+#define ld long double
+#define vi vector<int>
+#define ii pair<int, int>
+#define iii pair<int, ii>
+#define vii vector<ii>
+#define f first
+#define s second
+#define s1 s.f
+#define t s.s
+#define pb push_back
+#define fl '\n'
+#define el endl
+#define all(x) x.begin(), x.end()
+#define rall(x) x.rbegin(), x.rend()
+#define IOS                           \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(nullptr);                 \
+    cout.tie(nullptr);
+
+using namespace std;
+/*
+cuando no haya podido resolver el problema por mi mismo , 1 dia o mas intentandolo pondre esto encima.
+Si esto aparece significa que necesite pistas o la solucion
+*/
+int n , k;
+bool a[11][8][8];
+
+bool ok(int k , int i , int y);
+
+int32_t main()
+{
+    freopen("bcs.in", "r", stdin);
+	freopen("bcs.out", "w", stdout);
+    cin >> n >> k;
+    char b;
+    for(int i = 0; i <= k ; i++){
+        for(int x = 0 ; x < n ; x++){
+            for(int y = 0 ; y < n ; y++){
+                    cin >> b;
+                    a[i][x][y] = (b == '#' ? 1 : 0);
+                }
+            }
+        }
+
+    for(int frs = 1 ; frs <= k ; frs++){
+        for(int sec = frs + 1 ; sec <= k ; sec++){
+            for(int ix = -n + 1 ; ix < n ; ix++){
+                for(int iy = -n + 1 ; iy < n ; iy++){
+                    for(int yx = -n + 1 ; yx < n ; yx++){
+                        for(int yy = -n + 1 ; yy < n ; yy++){
+                            bool poss = 1;
+                            for(int x = 0 ; x < n && poss; x++){
+                                for(int y = 0 ; y < n && poss; y++){
+                                    bool primer = ok(frs , x + ix , y + iy);
+                                    bool segundo = ok(sec , x + yx , y + yy);
+
+                                    if(primer && segundo)
+                                        poss = 0;
+
+                                    if(a[0][x][y] != (primer || segundo))
+                                        poss = 0;
+                                    }
+                                }
+                                if(poss){
+                                    cout << frs << ' ' << sec << '\n';
+                                    return 0;
+                                    }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+}
+    bool ok(int k , int i , int y){
+        return i >= 0 && i < n && y >= 0 && y < n && a[k][i][y];
+        }
+/*
+Recuerda el overflow aunque no lo veas
+ */
